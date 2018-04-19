@@ -1,0 +1,25 @@
+﻿@font-face {
+    font-family: myFirstFont;
+    font-weight: 500;
+    src: url('../fonts/righteous-v6-latin-ext_latin-regular.woff') format('woff');
+}
+
+html {
+    font-family: myFirstFont;
+}
+
+body {
+    font-family: myFirstFont;
+    background-color:white;
+}
+
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+    font-family: myFirstFont;
+}
+
+@media screen and (min-width: 768px) {
+    #custom-nav a {
+        font-family: myFirstFont;
+    }
+}
+

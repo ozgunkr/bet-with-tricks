@@ -1,0 +1,182 @@
+﻿
+@{
+    ViewBag.Title = "Articles";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<div class="col-lg-12">
+    <h1 class="page-header">
+        Article List
+    </h1>
+    <ol class="breadcrumb">
+        <li>
+            <i class="fa fa-dashboard"></i>  <a href="@Url.Action("Index", "Admin", null)">Dashboard</a>
+        </li>
+        <li class="active">
+            <i class="fa fa-file"></i> Article Lists
+        </li>
+    </ol>
+</div>
+<div class="container">
+    <div class="spinner" ng-show="loading">
+        <div class="loader"></div>
+    </div>
+    <style>
+        table {
+            table-layout: fixed;
+            width: 100%;
+        }
+    </style>
+
+    <div class="row" ng-controller="ArticlesPageCtrl">
+        <div>
+            <h2>Bordered with Striped Rows</h2>
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover table-striped">
+                    <thead>
+                        <tr>
+                            <th>Article Name</th>
+                            <th>Article Category</th>
+                            <th>Image</th>
+                            <th>Active</th>
+                            <th>Article Content Short</th>
+                            <th>Article Content</th>
+                            <th>Language</th>
+                            <th>Author</th>
+                            <th>Create Date</th>
+                            <th>Valid From</th>
+                            <th>Valid To</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="i in ArticleListPg">
+                            <td>{{i.article_name}}</td>
+                            <td>{{i.article_category}}</td>
+                            <td width="90"><img ng-src="{{i.image}}" height="60" width="90" /></td>
+                            <td>{{i.is_active}}</td>
+                            <td>{{ i.article_content_short | limitTo: 20 }}{{i.article_content_short.length > 20 ? '...' : ''}}</td>
+                            <td>{{ i.article_content | limitTo: 20 }}{{i.article_content.length > 20 ? '...' : ''}}</td>
+                            <td>{{i.language}}</td>
+                            <td>{{i.author}}</td>
+                            <td>{{i.create_date}}</td>
+                            <td>{{i.valid_from}}</td>
+                            <td>{{i.valid_to}}</td>
+                            <td>
+                                <a href ng:click="editModal(i.article_id, $event)" data-toggle="modal" data-target="#edit" type="button"><i style="margin-right: 0.5em; position:center" class="fa fa-edit fa-lg"></i></a>
+                                <a href ng:click="deleteModal(i.article_id, $index)" type="button"><i style="margin-right: 0.5em; position:center" class="fa fa-trash-o fa-lg"></i></a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- Modal Edit-->
+
+        <div id="edit" class="modal fade" role="dialog">
+            <div class="modal-dialog" style="width:1050px;">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Edit Games</h4>
+                    </div>
+                    <div class="modal-body">
+                        </br>
+
+                        <div class="row">
+                            <form name="masterForm">
+                                <div class="form-group">
+                                    <label>Article Name</label>
+                                    <input type="text" name="articleName" ng-model="articleName" class="form-control" required maxlength="50">
+                                    <div class="validateAdminForm" ng-messages="masterForm.articleName.$error" ng-if="masterForm.articleName.$dirty">
+                                        <div ng-message="required">Cannot Be Empty</div>
+                                        <div ng-message="maxlength">Cannot Be Longer Than 50 Char</div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Article Category</label>
+                                    <br />
+                                    <select style="width:150px" ng-model="articleCategory" class="form-control" ng-options="x for x in artCat" required></select>
+                                    <div class="validateAdminForm" ng-messages="masterForm.articleCategory.$error" ng-if="masterForm.articleCategory.$dirty">
+                                        <div ng-message="required">Cannot Be Empty</div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Image Path</label>
+                                    <input type="text" name="imgpath" ng-model="imgpath" class="form-control" required imgarticle>
+                                    <i>path should be start with "../Templates/ArticleImages/" ==> e.g. "../Templates/ArticleImages/PICTURE.png" </i>
+                                    <div class="validateAdminForm" ng-messages="masterForm.imgpath.$error" ng-if="masterForm.imgpath.$dirty">
+                                        <div ng-message="required">Cannot Be Empty</div>
+                                        <div ng-message="prefixValidator">Should Be Correct Prefix</div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Article Content Short</label>
+                                    <textarea type="text" name="articleContentShort" ng-model="articleContentShort" class="form-control" required maxlength="200"></textarea>
+                                    <div class="validateAdminForm" ng-messages="masterForm.articleContentShort.$error" ng-if="masterForm.articleContentShort.$dirty">
+                                        <div ng-message="required">Cannot Be Empty</div>
+                                        <div ng-message="maxlength">Cannot Be Longer Than 200 Char</div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Article Content</label>
+                                    <textarea type="text" name="articleContent" ng-model="articleContent" class="form-control" required maxlength="1500"></textarea>
+                                    <div class="validateAdminForm" ng-messages="masterForm.articleContent.$error" ng-if="masterForm.articleContent.$dirty">
+                                        <div ng-message="required">Cannot Be Empty</div>
+                                        <div ng-message="maxlength">Cannot Be Longer Than 1500 Char</div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Language</label>
+                                    <br />
+                                    <select style="width:100px" ng-model="language" class="form-control" ng-options="i for i in artLan" required></select>
+                                    <div class="validateAdminForm" ng-messages="masterForm.language.$error" ng-if="masterForm.language.$dirty">
+                                        <div ng-message="required">Cannot Be Empty</div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Is Active </label>
+                                    <select style="width:100px" ng-model="isActive" class="form-control" ng-options="i for i in artAct" required></select>
+                                    <i>type 1 for active, 0 for inactive</i>
+                                    <div class="validateAdminForm" ng-messages="masterForm.isActive.$error" ng-if="masterForm.isActive.$dirty">
+                                        <div ng-message="required">Cannot Be Empty</div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Author</label>
+                                    <input type="text" name="author" ng-model="author" class="form-control" required maxlength="20">
+                                    <div class="validateAdminForm" ng-messages="masterForm.author.$error" ng-if="masterForm.author.$dirty">
+                                        <div ng-message="required">Cannot Be Empty</div>
+                                        <div ng-message="maxlength">Cannot Be Longer Than 20 Char</div>
+                                    </div>
+                                </div>
+                                @*<div class="form-group">
+                                        <label>Valid From</label>
+                                        <p>Current Valid From Value is {{validFrom}} </p>
+                                        <br />
+                                        <md-datepicker ng-model="validFromToUpd" md-current-view="year" md-placeholder="Enter date"></md-datepicker>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Valid To</label>
+                                        <p>Current Valid From Value is {{validTo}} </p>
+                                        <br />
+                                        <md-datepicker ng-model="validToToUpd" md-current-view="year" md-placeholder="Enter date"></md-datepicker>
+                                    </div>*@
+                            </form>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" ng-click="updateArticle()" class="btn btn-success"> Submit <i class="fa fa-check"></i> </button>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+
+
+</div>

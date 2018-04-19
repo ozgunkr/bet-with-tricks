@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="c6b84154a61442db85db907f32f5048e" Name="Diagram1">
+        <EntityTypeShape EntityType="BAModel.t_contacts" Width="1.5" PointX="2.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BAModel.t_game_detail" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BAModel.t_game_master" Width="1.5" PointX="4.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BAModel.t_admin" Width="1.5" PointX="7.375" PointY="0.75" />
+        <AssociationConnector Association="BAModel.FK_t_game_detail_t_game_master" />
+        <EntityTypeShape EntityType="BAModel.t_article" Width="1.5" PointX="1.125" PointY="0.5" />
+        <EntityTypeShape EntityType="BAModel.t_bet_detail" Width="1.5" PointX="9.625" PointY="4" />
+        <EntityTypeShape EntityType="BAModel.t_bet_master" Width="1.5" PointX="7.375" PointY="4.25" />
+        <AssociationConnector Association="BAModel.FK_t_bet_detail_t_bet_master" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

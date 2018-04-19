@@ -1,0 +1,40 @@
+﻿@model BetAnalytics.Models.t_admin
+
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+}
+@using (Html.BeginForm("Login", "Account", FormMethod.Post))
+{
+    <div class="container" style="width:300px">
+        <h2>BetAnalytics Login Form</h2>
+        <form autocomplete="off">
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input autocomplete="off" type="text" class="form-control" @Html.TextBoxFor(m => m.email) 
+                <a>@Html.ValidationMessageFor(m => m.email, "", new { @class = "error" })</a>
+                @*<input type="email" class="form-control" id="email" placeholder="Enter email" name="email">*@
+            </div>
+            <div class="form-group">
+                <label for="pwd">Password:</label>
+                <input autocomplete="off" type="password" class="form-control" @Html.TextBoxFor(m => m.password)
+                <a>@Html.ValidationMessageFor(m => m.password, "", new { @class = "error" })</a>
+                @* <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pwd">*@
+            </div>
+            <div class="form-group">
+                <label for="pwd">RememberMe:</label>
+                @Html.CheckBoxFor(m => m.RememberMe)
+            </div>
+            <input type="submit" value="Submit" class="btn btn-default"/>
+            @*<button type="submit" class="btn btn-default">Submit</button>*@
+        </form>
+    </div>
+    if (@ViewBag.Message != null)
+    {
+        <script type="text/javascript">
+            $(function () {
+                alert("@ViewBag.Message")
+            });
+        </script>
+    }
+}

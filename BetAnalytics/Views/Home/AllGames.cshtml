@@ -1,0 +1,129 @@
+﻿
+@{
+    ViewBag.Title = "AllGames";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script type="text/javascript" src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="~/Scripts/bootstrap.min.js"></script>
+
+<link href="~/Templates/Assets/css/allgames.css" rel="stylesheet">
+<!-- Page Header -->
+@*<header class="masthead" style="background-image: url('/Templates/Images/bg1.png')">
+    <div class="container">
+        <div class="row">
+            <div class="mx-auto">
+                <div class="site-heading">
+                    <h1>BETRIX</h1>
+                    <span class="subheading">Start Winning With Analytic Tips</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>*@
+
+<div class="container">
+    <div class="row" ng-controller="AllGamesCtrl">
+
+        <div class="col-lg-12">
+            <h2>Tüm Maçlar</h2>
+
+            <ul uib-pagination boundary-links="true"
+                total-items="(AllGamesList | filter:searchItem).length"
+                ng-model="currentPage"
+                ng-change="updatePageIndexes()"
+                class="pagination-sm"
+                items-per-page="itemsPerPage"
+                previous-text="&lsaquo;"
+                next-text="&rsaquo;"
+                first-text="&laquo;"
+                last-text="&raquo;"></ul>
+            <br />
+            <form>
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="input-group-addon"><i class="fa fa-search"></i></div>
+                        <input type="text" class="form-control" placeholder="Ara" ng-model="searchItem">
+                    </div>
+                </div>
+            </form>
+            <br />
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th width="10px">#</th>
+                            <th>Maç</th>
+                            <th>Maç Günü</th>
+                            <th>Maç Tahmini</th>
+                            <th>Maç Durumu</th>
+                        </tr>
+                    </thead>
+                    <tbody ng-repeat="i in AllGamesList | filter : searchItem | limitTo:itemsPerPage:(currentPage - 1) * itemsPerPage">
+                        <tr>
+                            <td>
+                                <button id="allgamesBtn" ng:click="openDetailModal(i.id)" data-toggle="modal" data-target="#detail" type="button" class="btn btn-primary btn-sm outline">Detay</button>
+                            </td>
+                            <td>{{i.game_name}}</td>
+                            <td>{{i.game_day}}</td>
+                            <td>{{i.game_preference}}</td>
+                            <td id="state">
+                                    @*<img id="stateImg" ng-src="{{i.current_state}}"/>*@
+                                {{i.current_state}}
+                                
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- Modal Game Details-->
+
+        <div id="detail" class="modal fade" role="dialog">
+            <div class="modal-dialog modal-sm">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h2 class="modal-title" ng-model="gameName">{{gameName}}</h2>
+                        <h4 class="modal-title" ng-model="gameDescription">{{gameDescription}}</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <h2>Bahis Detayları</h2>
+                                <br />
+                                <div class="table-responsive">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>Maç Kodu</th>
+                                                <th>Tercih</th>
+                                                <th>Güven</th>
+                                                <th>Oran</th>
+                                                <th>Tutma Olasılığı</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="i in AllGameDetailLst">
+                                                <td>{{i.game_code}}</td>
+                                                <td>{{i.preference}}</td>
+                                                <td>{{i.trust}}</td>
+                                                <td>{{i.ratio}}</td>
+                                                <td ng-class="{'tr-red': i.possibility < 20, 'tr-yellow': 20 < i.possibility , 'tr-lightgreen': 50 < i.possibility ,'tr-green': 70 < i.possibility }">{{i.possibility}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

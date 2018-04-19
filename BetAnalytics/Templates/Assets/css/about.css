@@ -1,0 +1,73 @@
+﻿
+body {
+    background-color: #f9fffe;
+}
+
+h4 {
+    color: #222222;
+    font-size: 25px;
+    font-weight: 500;
+    /*font-family: Montserrat,'Helvetica Neue',Helvetica,Arial,sans-serif;*/
+}
+
+.team-member {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+    .team-member img {
+        margin: 0 auto;
+        border: 7px solid white;
+    }
+
+    .team-member h4 {
+        margin-top: 25px;
+        margin-bottom: 0;
+        text-transform: none;
+    }
+
+    .team-member p {
+        margin-top: 0;
+    }
+
+ul.social-buttons {
+    margin-bottom: 0;
+}
+
+    ul.social-buttons li a {
+        display: block;
+        background-color: #222222;
+        height: 40px;
+        width: 40px;
+        border-radius: 100%;
+        font-size: 20px;
+        line-height: 40px;
+        color: white;
+        outline: none;
+        -webkit-transition: all 0.3s;
+        -moz-transition: all 0.3s;
+        transition: all 0.3s;
+    }
+
+        ul.social-buttons li a:hover,
+        ul.social-buttons li a:focus,
+        ul.social-buttons li a:active {
+            background-color: #FF6F3C; /*#fed136*/
+            
+        }
+header.masthead .page-heading,
+header.masthead .post-heading,
+header.masthead .site-heading {
+    padding: 100px 0 106px 0;
+    color: white;
+}
+
+header.masthead {
+    background-attachment: scroll;
+    border-bottom: 4px solid black;
+}
+
+#custom-nav a {
+    color: #37474F;
+}
+

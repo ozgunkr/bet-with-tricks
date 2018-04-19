@@ -1,0 +1,427 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="BAModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="t_admin">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="email" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="password" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="t_article">
+          <Key>
+            <PropertyRef Name="article_id" />
+          </Key>
+          <Property Name="article_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="article_name" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="article_category" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="image" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="is_active" Type="nvarchar" MaxLength="5" Nullable="false" />
+          <Property Name="article_content_short" Type="nvarchar" MaxLength="3000" Nullable="false" />
+          <Property Name="article_content" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="language" Type="nvarchar" MaxLength="5" Nullable="false" />
+          <Property Name="create_date" Type="datetime" Nullable="false" />
+          <Property Name="valid_from" Type="datetime" Nullable="false" />
+          <Property Name="valid_to" Type="datetime" Nullable="false" />
+          <Property Name="author" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="t_bet_detail">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="bet_id" Type="int" Nullable="false" />
+          <Property Name="game_name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="game_code" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="preference" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="trust" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ratio" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="possibility" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="game_date" Type="datetime" Nullable="false" />
+          <Property Name="game_date_prompt" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="t_bet_master">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="bet_name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="is_active" Type="nvarchar" MaxLength="5" Nullable="false" />
+          <Property Name="create_date" Type="datetime" Nullable="false" />
+          <Property Name="description" Type="nvarchar" MaxLength="1000" Nullable="false" />
+        </EntityType>
+        <EntityType Name="t_contacts">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="email" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="comment" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="login_ip" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="create_date" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="t_game_detail">
+          <Key>
+            <PropertyRef Name="game_detail_id" />
+          </Key>
+          <Property Name="game_detail_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="game_id" Type="int" Nullable="false" />
+          <Property Name="preference" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="trust" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ratio" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="possibility" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="region" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="game_code" Type="nvarchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="t_game_master">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="game_name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="image" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="is_active" Type="nvarchar" MaxLength="5" Nullable="false" />
+          <Property Name="create_date" Type="datetime" Nullable="false" />
+          <Property Name="category" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="description" Type="nvarchar" MaxLength="3000" Nullable="false" />
+          <Property Name="sub_category" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="priority" Type="nvarchar" MaxLength="5" Nullable="false" />
+          <Property Name="game_date" Type="datetime" Nullable="false" />
+          <Property Name="game_day" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="game_day_prompt" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="game_preference" Type="nvarchar" MaxLength="50" />
+          <Property Name="current_state" Type="nvarchar" MaxLength="5" />
+        </EntityType>
+        <Association Name="FK_t_bet_detail_t_bet_master">
+          <End Role="t_bet_master" Type="Self.t_bet_master" Multiplicity="1" />
+          <End Role="t_bet_detail" Type="Self.t_bet_detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_bet_master">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="t_bet_detail">
+              <PropertyRef Name="bet_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_t_game_detail_t_game_master">
+          <End Role="t_game_master" Type="Self.t_game_master" Multiplicity="1" />
+          <End Role="t_game_detail" Type="Self.t_game_detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_game_master">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="t_game_detail">
+              <PropertyRef Name="game_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="ba_usp_validate_user" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="in_vchEmail" Type="nvarchar" Mode="In" />
+          <Parameter Name="in_vchPassword" Type="nvarchar" Mode="In" />
+        </Function>
+        <EntityContainer Name="BAModelStoreContainer">
+          <EntitySet Name="t_admin" EntityType="Self.t_admin" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="t_article" EntityType="Self.t_article" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="t_bet_detail" EntityType="Self.t_bet_detail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="t_bet_master" EntityType="Self.t_bet_master" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="t_contacts" EntityType="Self.t_contacts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="t_game_detail" EntityType="Self.t_game_detail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="t_game_master" EntityType="Self.t_game_master" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_t_bet_detail_t_bet_master" Association="Self.FK_t_bet_detail_t_bet_master">
+            <End Role="t_bet_master" EntitySet="t_bet_master" />
+            <End Role="t_bet_detail" EntitySet="t_bet_detail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_t_game_detail_t_game_master" Association="Self.FK_t_game_detail_t_game_master">
+            <End Role="t_game_master" EntitySet="t_game_master" />
+            <End Role="t_game_detail" EntitySet="t_game_detail" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="BAModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="t_contacts">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="comment" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="create_date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="login_ip" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="t_game_detail">
+          <Key>
+            <PropertyRef Name="game_detail_id" />
+          </Key>
+          <Property Name="game_detail_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="game_id" Type="Int32" Nullable="false" />
+          <Property Name="preference" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="trust" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ratio" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="possibility" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="region" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="t_game_master" Relationship="BAModel.FK_t_game_detail_t_game_master" FromRole="t_game_detail" ToRole="t_game_master" />
+          <Property Name="game_code" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="t_game_master">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="game_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="image" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="create_date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="is_active" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="t_game_detail" Relationship="BAModel.FK_t_game_detail_t_game_master" FromRole="t_game_master" ToRole="t_game_detail" />
+          <Property Name="category" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="description" Type="String" Nullable="false" MaxLength="3000" FixedLength="false" Unicode="true" />
+          <Property Name="sub_category" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="priority" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="game_date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="game_day" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="game_day_prompt" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="game_preference" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="current_state" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityContainer Name="BAEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="t_contacts" EntityType="Self.t_contacts" />
+          <EntitySet Name="t_game_detail" EntityType="Self.t_game_detail" />
+          <EntitySet Name="t_game_master" EntityType="Self.t_game_master" />
+          <EntitySet Name="t_admin" EntityType="BAModel.t_admin" />
+          <FunctionImport Name="ba_usp_validate_user" ReturnType="Collection(Int32)">
+            <Parameter Name="in_vchEmail" Mode="In" Type="String" />
+            <Parameter Name="in_vchPassword" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="ValidateUser" ReturnType="Collection(Int32)">
+            <Parameter Name="in_vchEmail" Mode="In" Type="String" />
+            <Parameter Name="in_vchPassword" Mode="In" Type="String" />
+          </FunctionImport>
+          <AssociationSet Name="FK_t_game_detail_t_game_master" Association="BAModel.FK_t_game_detail_t_game_master">
+            <End Role="t_game_master" EntitySet="t_game_master" />
+            <End Role="t_game_detail" EntitySet="t_game_detail" />
+          </AssociationSet>
+          <EntitySet Name="t_article" EntityType="BAModel.t_article" />
+          <EntitySet Name="t_bet_detail" EntityType="BAModel.t_bet_detail" />
+          <EntitySet Name="t_bet_master" EntityType="BAModel.t_bet_master" />
+          <AssociationSet Name="FK_t_bet_detail_t_bet_master" Association="BAModel.FK_t_bet_detail_t_bet_master">
+            <End Role="t_bet_master" EntitySet="t_bet_master" />
+            <End Role="t_bet_detail" EntitySet="t_bet_detail" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="t_admin">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <Association Name="FK_t_game_detail_t_game_master">
+          <End Type="BAModel.t_game_master" Role="t_game_master" Multiplicity="1" />
+          <End Type="BAModel.t_game_detail" Role="t_game_detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_game_master">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="t_game_detail">
+              <PropertyRef Name="game_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="t_article">
+          <Key>
+            <PropertyRef Name="article_id" />
+          </Key>
+          <Property Name="article_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="article_name" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="article_category" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="image" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="is_active" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="article_content_short" Type="String" Nullable="false" MaxLength="3000" FixedLength="false" Unicode="true" />
+          <Property Name="article_content" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="language" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="create_date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="valid_from" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="valid_to" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="author" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="t_bet_detail">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="bet_id" Type="Int32" Nullable="false" />
+          <Property Name="game_name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="game_code" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="preference" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="trust" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ratio" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="possibility" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="t_bet_master" Relationship="BAModel.FK_t_bet_detail_t_bet_master" FromRole="t_bet_detail" ToRole="t_bet_master" />
+          <Property Name="game_date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="game_date_prompt" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="t_bet_master">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="bet_name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="is_active" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="create_date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="description" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="t_bet_detail" Relationship="BAModel.FK_t_bet_detail_t_bet_master" FromRole="t_bet_master" ToRole="t_bet_detail" />
+        </EntityType>
+        <Association Name="FK_t_bet_detail_t_bet_master">
+          <End Type="BAModel.t_bet_master" Role="t_bet_master" Multiplicity="1" />
+          <End Type="BAModel.t_bet_detail" Role="t_bet_detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_bet_master">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="t_bet_detail">
+              <PropertyRef Name="bet_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="BAModelStoreContainer" CdmEntityContainer="BAEntities">
+          <EntitySetMapping Name="t_contacts">
+            <EntityTypeMapping TypeName="BAModel.t_contacts">
+              <MappingFragment StoreEntitySet="t_contacts">
+                <ScalarProperty Name="login_ip" ColumnName="login_ip" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="comment" ColumnName="comment" />
+                <ScalarProperty Name="create_date" ColumnName="create_date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="t_game_detail">
+            <EntityTypeMapping TypeName="BAModel.t_game_detail">
+              <MappingFragment StoreEntitySet="t_game_detail">
+                <ScalarProperty Name="game_code" ColumnName="game_code" />
+                <ScalarProperty Name="game_detail_id" ColumnName="game_detail_id" />
+                <ScalarProperty Name="game_id" ColumnName="game_id" />
+                <ScalarProperty Name="preference" ColumnName="preference" />
+                <ScalarProperty Name="trust" ColumnName="trust" />
+                <ScalarProperty Name="ratio" ColumnName="ratio" />
+                <ScalarProperty Name="possibility" ColumnName="possibility" />
+                <ScalarProperty Name="region" ColumnName="region" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="t_game_master">
+            <EntityTypeMapping TypeName="BAModel.t_game_master">
+              <MappingFragment StoreEntitySet="t_game_master">
+                <ScalarProperty Name="current_state" ColumnName="current_state" />
+                <ScalarProperty Name="game_preference" ColumnName="game_preference" />
+                <ScalarProperty Name="game_day_prompt" ColumnName="game_day_prompt" />
+                <ScalarProperty Name="game_day" ColumnName="game_day" />
+                <ScalarProperty Name="game_date" ColumnName="game_date" />
+                <ScalarProperty Name="priority" ColumnName="priority" />
+                <ScalarProperty Name="sub_category" ColumnName="sub_category" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="category" ColumnName="category" />
+                <ScalarProperty Name="is_active" ColumnName="is_active" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="game_name" ColumnName="game_name" />
+                <ScalarProperty Name="image" ColumnName="image" />
+                <ScalarProperty Name="create_date" ColumnName="create_date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="t_admin">
+            <EntityTypeMapping TypeName="BAModel.t_admin">
+              <MappingFragment StoreEntitySet="t_admin">
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="ba_usp_validate_user" FunctionName="BAModel.Store.ba_usp_validate_user" />
+          <FunctionImportMapping FunctionImportName="ValidateUser" FunctionName="BAModel.Store.ba_usp_validate_user" />
+          <EntitySetMapping Name="t_article">
+            <EntityTypeMapping TypeName="BAModel.t_article">
+              <MappingFragment StoreEntitySet="t_article">
+                <ScalarProperty Name="author" ColumnName="author" />
+                <ScalarProperty Name="valid_to" ColumnName="valid_to" />
+                <ScalarProperty Name="valid_from" ColumnName="valid_from" />
+                <ScalarProperty Name="create_date" ColumnName="create_date" />
+                <ScalarProperty Name="language" ColumnName="language" />
+                <ScalarProperty Name="article_content" ColumnName="article_content" />
+                <ScalarProperty Name="article_content_short" ColumnName="article_content_short" />
+                <ScalarProperty Name="is_active" ColumnName="is_active" />
+                <ScalarProperty Name="image" ColumnName="image" />
+                <ScalarProperty Name="article_category" ColumnName="article_category" />
+                <ScalarProperty Name="article_name" ColumnName="article_name" />
+                <ScalarProperty Name="article_id" ColumnName="article_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="t_bet_detail">
+            <EntityTypeMapping TypeName="BAModel.t_bet_detail">
+              <MappingFragment StoreEntitySet="t_bet_detail">
+                <ScalarProperty Name="game_date_prompt" ColumnName="game_date_prompt" />
+                <ScalarProperty Name="game_date" ColumnName="game_date" />
+                <ScalarProperty Name="possibility" ColumnName="possibility" />
+                <ScalarProperty Name="ratio" ColumnName="ratio" />
+                <ScalarProperty Name="trust" ColumnName="trust" />
+                <ScalarProperty Name="preference" ColumnName="preference" />
+                <ScalarProperty Name="game_code" ColumnName="game_code" />
+                <ScalarProperty Name="game_name" ColumnName="game_name" />
+                <ScalarProperty Name="bet_id" ColumnName="bet_id" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="t_bet_master">
+            <EntityTypeMapping TypeName="BAModel.t_bet_master">
+              <MappingFragment StoreEntitySet="t_bet_master">
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="create_date" ColumnName="create_date" />
+                <ScalarProperty Name="is_active" ColumnName="is_active" />
+                <ScalarProperty Name="bet_name" ColumnName="bet_name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

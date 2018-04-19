@@ -1,42 +1,222 @@
 ﻿<!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Dünya'dan ve Türkiye'den her hafta 100'lerce maçın tahmini içeren, duyguları değil analitik verileri kullanan, iddaa ve bahissever portalı.">
+    <meta name="author" content="betricks">
+    <meta name="google-site-verification" content="FH7RtmWaAF_OHqvekWwMrB-2b5d2l1x73LBU77jvxUs" />
+    <title>BETRICKS - Türkiye'nin En Güvenilir Maç Tahmin Sitesi</title>
+    <link rel="icon" href="~/Templates/Images/footer.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="~/Templates/Images/header.png" />
+    <link rel="apple-touch-icon" sizes="152x152" href="~/Templates/Images/footer.png" />
+
+    <!-- Bootstrap core JavaScript -->
+
+    <script type="text/javascript" src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/angular.js"></script>
+    <script type="text/javascript" src="~/Scripts/angular-route.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/angular-messages.js"></script>
+    <script type="text/javascript" src="~/Scripts/angular-animate.js"></script>
+    <script type="text/javascript" src="~/Scripts/angular-sanitize.js"></script>
+    <script type="text/javascript" src="~/Templates/Assets/js/angular-filter.js"></script>
+    <script type="text/javascript" src="~/Scripts/bootstrap.min.js"></script>
+    <script type="text/javascript" src="~/Templates/Assets/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript" src="~/Templates/Assets/js/ui-bootstrap-tpls.min.js"></script>
+    <script type="text/javascript" src="~/Templates/Assets/js/moment.min.js"></script>
+    <script type="text/javascript" src="~/Templates/Assets/js/navbar.js"></script>
+
+
+    <!-- Angular Components -->
+    <script type="text/javascript" src="~/Templates/Assets/MainAngular/app.js"></script>
+    <script type="text/javascript" src="~/Templates/Assets/MainAngular/controllers/ContactController.js"></script>
+    <script type="text/javascript" src="~/Templates/Assets/MainAngular/directives/nameValidationDirective.js"></script>
+    <script type="text/javascript" src="~/Templates/Assets/MainAngular/directives/emailValidationDirective.js"></script>
+    <script type="text/javascript" src="~/Templates/Assets/MainAngular/controllers/BetController.js"></script>
+    <script type="text/javascript" src="~/Templates/Assets/MainAngular/controllers/BlogController.js"></script>
+    <script type="text/javascript" src="~/Templates/Assets/MainAngular/controllers/BlogDetailController.js"></script>
+    <script type="text/javascript" src="~/Templates/Assets/MainAngular/controllers/AllGamesController.js"></script>
+    <script type="text/javascript" src="~/Templates/Assets/MainAngular/controllers/BetListController.js"></script>
+
+
+
+    <!-- Custom styles for this template -->
+    <link href="~/Templates/Assets/css/clean-blog.css" rel="stylesheet">
+    <link href="~/Templates/Assets/css/navbar.css" rel="stylesheet">
+    <link href="~/Templates/Assets/css/footer.css" rel="stylesheet">
+    <link href="~/Templates/Assets/css/font-awesome.min.css" rel="stylesheet">
+    <link href="~/Templates/Assets/css/parallaxslide.css" rel="stylesheet">
+    @*<link href="~/Templates/Assets/css/blog-home.css" rel="stylesheet">*@
+    @*<link href="~/Templates/Assets/css/FlipBoard.css" rel="stylesheet">*@
+    <!-- Bootstrap core CSS -->
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet">
+    <link href="~/Templates/Assets/css/fonts.css" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+    <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+
+
+    @*<a href="@Url.Action("Index", "Home", null)">Ana Sayfa</a>
+        <a class="nav-link" href="@Url.Action("Index", "Home", null)">Home</a>
+        <a class="nav-link" href="@Url.Action("About", "Home", null)">About</a>
+        <a class="nav-link" href="@Url.Action("Contact", "Home", null)">Contact</a>*@
+
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-2546054454386201",
+    enable_page_level_ads: true
+  });
+    </script>
 </head>
-<body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+
+<body ng-app="BetApp">
+
+
+    <button onclick="topFunction()" id="myBtn" title="En Tepeye Çık">Yukarı</button>
+    <!-- Navigation -->
+    <!-- the header that will be animated by adding the respective state class to it -->
+    <!-- Navigation -->
+    
+        <nav id="custom-nav" class="navbar navbar-default navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="@Url.Action("Index", "Home", null)">
+                        <img src="~/Templates/Images/header.png" />
+                    </a>
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-top-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <div class="collapse navbar-collapse navbar-top-collapse">
+                    <ul class="nav navbar-nav navbar-right" id="top_menu">
+                        <li class="nav-item">
+                            <a class="nav-link cst" href="@Url.Action("Index", "Home", null)">ANASAYFA</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link cst" href="@Url.Action("BetList", "Home", null)">KUPONLAR</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link cst" href="@Url.Action("Blog", "Home", null)">BLOG</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link cst" href="@Url.Action("Donate", "Home", null)">DESTEK</a>
+                        </li>
+                        @*<li class="dropdown" id="dropdown">
+                            <button class="dropbtn">DİĞER</button>
+                            <div class="dropdown-content">
+                                <a class="nav-link" href="@Url.Action("Blog", "Home", null)">BLOG</a>
+                                <a href="#">Link 2</a>
+                                <a href="#">Link 3</a>
+                            </div>
+                        </li>*@
+                        @*<li class="nav-item">
+                            <a class="nav-link cst" href="@Url.Action("About", "Home", null)">BİZ KİMİZ?</a>
+                        </li>*@
+                        <li class="nav-item">
+                            <a class="nav-link cst" href="@Url.Action("Contact", "Home", null)">İLETİŞİM</a>
+                        </li>
+                    </ul>
+                </div>
             </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    <div class="container body-content">
+        </nav>
+    <div>
         @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
     </div>
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
+    <!-- Footer -->
+    
+    <footer class="nb-footer">
+        <div class="container">
+            <br />
+            <div class="row">
+                <div class="col-sm-2">
+                    <div class="about">
+                        <a href="@Url.Action("Index", "Home", null)">
+                            <img id="flogo" src="~/Templates/Images/footer.png" class="center-block" alt="">
+                        </a>
+                    </div>
+                </div>
+                <div class="col-sm-8">
+                    <div class="about">
+                        <div class="social-media">
+                            <ul class="list-inline">
+                                <li><a href="https://www.facebook.com/betrixcom-384170862037892/?modal=admin_todo_tour" title=""><i class="fa fa-facebook fa-2x"></i></a></li>
+                                <li><a href="https://twitter.com/betrix_official" title=""><i class="fa fa-twitter fa-2x"></i></a></li>
+                                <li><a href="https://www.instagram.com/betrixofficial/" title=""><i class="fa fa-instagram fa-2x"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <br />
+            <div class="row">
+                <div class="col-sm-2">
+                    <div class="footer-info-single">
+                        <h2 class="title">BİLGİ</h2>
+                        <ul class="list-unstyled">
+                            <li><a href="@Url.Action("About", "Home", null)" title=""><i class="fa fa-angle-double-right"></i> Hakkımızda</a></li>
+                            <li><a href="@Url.Action("Contact", "Home", null)" title=""><i class="fa fa-angle-double-right"></i> İletişim</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="footer-info-single">
+                        <h2 class="title">GÜVENLİK</h2>
+                        <ul class="list-unstyled">
+                            <li><a href="@Url.Action("ToU", "Home", null)" title=""><i class="fa fa-angle-double-right"></i> Kullanım Şartları</a></li>
+                        </ul>
+                    </div>
+                </div>
+                @*<div class="col-md-3 col-sm-6">
+                    <div class="footer-info-single">
+                        <h2 class="title">Payment</h2>
+                        <p>Sample HTML page with Twitter's Bootstrap. Code example of Easy Sticky Footer using HTML, Javascript, jQuery, and CSS. This bootstrap tutorial covers all the major elements of responsive</p>
+
+                    </div>
+                </div>*@
+            </div>
+        </div>
+        <section class="copyright">
+            <div class="container">
+                <div class="row">
+                    <div class="mx-auto">
+                        <i>2017 © Betricks. Tüm Hakları Saklıdır.</i>
+                    </div>
+                    <div class="col-sm-6"></div>
+                </div>
+            </div>
+        </section>
+    </footer>
+
+    <script>
+        // When the user scrolls down 20px from the top of the document, show the button
+        window.onscroll = function () { scrollFunction() };
+
+        function scrollFunction() {
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                document.getElementById("myBtn").style.display = "block";
+            } else {
+                document.getElementById("myBtn").style.display = "none";
+            }
+        }
+
+        // When the user clicks on the button, scroll to the top of the document
+        function topFunction() {
+            document.body.scrollTop = 0;
+            document.documentElement.scrollTop = 0;
+        }
+    </script>
+
 </body>
+
 </html>

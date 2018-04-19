@@ -1,0 +1,196 @@
+﻿
+@{
+    ViewBag.Title = "Games";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="col-lg-12">
+    <h1 class="page-header">
+       Game List
+    </h1>
+    <ol class="breadcrumb">
+        <li>
+            <i class="fa fa-dashboard"></i>  <a href="@Url.Action("Index", "Admin", null)">Dashboard</a>
+        </li>
+        <li class="active">
+            <i class="fa fa-file"></i> Game List
+        </li>
+    </ol>
+</div>
+<div class="container">
+    <div class="spinner" ng-show="loading">
+        <div class="loader"></div>
+    </div>
+
+    <div class="row" ng-controller="GamesPageCtrl">
+        <div class="col-lg-12">
+            <h2>Bordered with Striped Rows</h2>
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover table-striped">
+                    <thead>
+                        <tr>
+                            <th>Game</th>
+                            <th>Image</th>
+                            <th>Create Date</th>
+                            <th>Active</th>
+                            <th>Category</th>
+                            <th>Sub Category</th>
+                            <th>Description</th>
+                            <th>Game Preference</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="i in GameMasterListPg">
+                            <td>{{i.game_name}}</td>
+                            <td width="120"><img ng-src="{{i.image}}" height="60" width="100" /></td>
+                            <td>{{i.create_date}}</td>
+                            <td>{{i.is_active}}</td>
+                            <td>{{i.category}}</td>
+                            <td>{{i.sub_category}}</td>
+                            <td>{{i.description}}</td>
+                            <td>{{i.game_preference}}</td>
+                            <td>
+                                <a href ng:click="editModal(i.id)" data-toggle="modal" data-target="#edit" type="button"><i style="margin-right: 0.5em; position:center" class="fa fa-edit fa-lg"></i></a>
+                                <a href ng:click="deleteModal(i.id, $index)" type="button"><i style="margin-right: 0.5em; position:center" class="fa fa-trash-o fa-lg"></i></a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- Modal Edit-->
+
+        <div id="edit" class="modal fade" role="dialog">
+            <div class="modal-dialog" style="width:1050px;">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Edit Games</h4>
+                    </div>
+                    <div class="modal-body">
+                        <br />
+
+                        <div class="row">
+                            <form name="masterForm">
+                                <div class="form-group">
+                                    <label>Game Name</label>
+                                    <input type="text" name="gamename" ng-model="gamename" class="form-control" required>
+                                    <div class="validateAdminForm" ng-messages="masterForm.gamename.$error" ng-if="masterForm.gamename.$dirty">
+                                        <div ng-message="required">Cannot Be Empty</div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Image Path</label>
+                                    <input type="text" name="imgpath" ng-model="imgpath" class="form-control" required imggame>
+                                    <i>path should be start with "../Templates/GameImages/" ==> e.g. "../Templates/GameImages/PICTURE.png" </i>
+                                    <div class="validateAdminForm" ng-messages="masterForm.imgpath.$error" ng-if="masterForm.imgpath.$dirty">
+                                        <div ng-message="required">Cannot Be Empty</div>
+                                        <div ng-message="prefixValidator">Should Be Correct Prefix</div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Is Active </label>
+                                    <select style="width:100px" ng-model="isActive" class="form-control" ng-options="i for i in artAct" required></select>
+                                    <i>type 1 for active, 0 for inactive</i>
+                                    <div class="validateAdminForm" ng-messages="masterForm.isActive.$error" ng-if="masterForm.isActive.$dirty">
+                                        <div ng-message="required">Cannot Be Empty</div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Game Category</label>
+                                    <br />
+                                    <select style="width:150px" ng-model="gameCategory" class="form-control" ng-options="x for x in gameCat" data-ng-change="getSubCat()"  required></select>
+                                    <div class="validateAdminForm" ng-messages="masterForm.gameCategory.$error" ng-if="masterForm.gameCategory.$dirty">
+                                        <div ng-message="required">Cannot Be Empty</div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Game Sub Category</label>
+                                    <br />
+                                    <select style="width:150px" ng-model="gameSubCategory" class="form-control" ng-options="x for x in gameSubCat" required></select>
+                                    <div class="validateAdminForm" ng-messages="masterForm.gameSubCategory.$error" ng-if="masterForm.gameSubCategory.$dirty">
+                                        <div ng-message="required">Cannot Be Empty</div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Game Description</label>
+                                    <textarea type="text" name="gameDescription" ng-model="gameDescription" class="form-control" required maxlength="200"></textarea>
+                                    <div class="validateAdminForm" ng-messages="masterForm.gameDescription.$error" ng-if="masterForm.gameDescription.$dirty">
+                                        <div ng-message="required">Cannot Be Empty</div>
+                                        <div ng-message="maxlength">Cannot Be Longer Than 200 Char</div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Is Active </label>
+                                    <select style="width:100px" ng-model="priority" class="form-control" ng-options="i for i in artAct" required></select>
+                                    <i>type 1 for appearance in Home Page, 0 for All Games Page</i>
+                                    <div class="validateAdminForm" ng-messages="masterForm.priority.$error" ng-if="masterForm.priority.$dirty">
+                                        <div ng-message="required">Cannot Be Empty</div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th width="60px">Preference</th>
+                                    <th width="180px">Trust</th>
+                                    <th width="380px">Ratio</th>
+                                    <th width="80px">Possibility</th>
+                                    <th width="70px">Region</th>
+                                    <th width="70px">Game Code</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                <tr ng-repeat="game in GameDetailList" id="GameDetailList">
+
+
+                                    <td>
+                                        <input type="text" class="form-control" placeholder="" ng-model="game.preference">
+                                    </td>
+                                    <td>
+                                        <input type="text" class="form-control" placeholder="" ng-model="game.trust">
+                                    </td>
+                                    <td>
+                                        <input type="text" class="form-control" placeholder="" ng-model="game.ratio">
+                                    </td>
+                                    <td>
+                                        <input type="text" class="form-control" placeholder="" ng-model="game.possibility">
+                                    </td>
+                                    <td>
+                                        <input type="text" class="form-control" placeholder="" ng-model="game.region">
+                                    </td>
+                                    <td>
+                                        <input type="text" class="form-control" placeholder="" ng-model="game.game_code">
+                                    </td>
+                                    <td>
+                                        <a href ng:click="deleteDetail(game.game_detail_id, $index)" type="button"><i style="margin-right: 0.5em; position:center" class="fa fa-trash-o fa-lg"></i></a>
+                                    </td>
+
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <a ng-click="addRow()" class="btn btn-primary">Add Row <i class="fa fa-plus"></i></a>
+
+                        <br />
+                        <label ng-show="deleteError">At Least One Row of Detail Must Remain Left!</label>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" ng-click="updateGames()" ng-disabled="masterForm.$invalid" class="btn btn-success"> Submit <i class="fa fa-check"></i> </button>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+
+</div>

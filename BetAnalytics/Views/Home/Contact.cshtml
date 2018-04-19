@@ -1,17 +1,88 @@
 ﻿@{
     ViewBag.Title = "Contact";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
 
-<address>
-    One Microsoft Way<br />
-    Redmond, WA 98052-6399<br />
-    <abbr title="Phone">P:</abbr>
-    425.555.0100
-</address>
 
-<address>
-    <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
-    <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
-</address>
+<link href="~/Templates/Assets/css/contactpage.css" rel="stylesheet">
+<link href="~/Templates/Assets/css/FlipBoard.css" rel="stylesheet">
+
+
+<!-- Page Header -->
+<header class="masthead" style="background-image: url('/Templates/Images/contact.png')">
+    <div class="container">
+        <div class="row">
+            <div class="mx-auto">
+                <div class="site-heading">
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<div class="container">
+    <div class="form-group" style="margin-top:40px;margin-bottom:40px;" ng-controller="ContactCtrl">
+        <div class="col-sm-6">
+            <h2>Neden İletişim Kurmalısınız?</h2>
+            <p>
+                Görüşlerinize önem veriyoruz. Bu sebeple önerileriniz veya sitemiz hakkındaki düzeltmemizi istediğiniz hususlar olması durumunda bu sayfadaki formu kullanarak bizlere ulaşabilirsiniz.
+            </p>
+        </div>
+        <div id="custCol" class="col-sm-6">
+            <h2>İletişim Formu</h2>
+            <div class="flipper1" id="flipper">
+                <div class="front">
+                    <form name="contactform" novalidate>
+                        <br />
+                        <!-- First Name -->
+                        <label>Adınız ve Soyadınız</label>
+                        <div class="styled-input wide">
+                            <input name="fname" ng-model="fname" type="text" n required>
+                            <div class="validateForm" ng-messages="contactform.fname.$error" ng-if="contactform.fname.$dirty">
+                                <div ng-message="required">*Boş bırakılamaz</div>
+                                <div ng-message="nValidator">*5 karakterden küçük olamaz</div>
+                                <div ng-message="fullnameValidator">*İsim ve Soyisim girilmesi gerekmektedir</div>
+                                <div ng-message="alphadashValidator">*alphadash</div>
+                            </div>
+                            @*<span ng-show="contactform.fname.$error.required && !contactform.fname.$pristine " class="validateForm">The name is required.</span>
+                                <span ng-show="!contactform.fname.$error.NameValidationDirective " class="validateForm">HATA</span>*@
+                        </div>
+
+                        <br />
+                        <!-- Email -->
+                        <label>E-posta Adresiniz</label>
+                        <div class="styled-input wide">
+                            <input type="email" name="email" ng-model="email" @*e*@ required email/>
+                            <small id="emailHelp" class="form-text text-muted">*E-Posta adresiniz kimseyle paylaşılmayacaktır</small>
+                            <div class="validateForm" ng-messages="contactform.email.$error" ng-if="contactform.email.$dirty">
+                                <div ng-message="required">*Boş bırakılamaz</div>
+                                <div ng-message="emailValidator">*Düzgün Adres Giriniz</div>
+                                <div ng-message="email">*Geçersiz Posta Formatı</div>
+                            </div>
+                        </div>
+
+                        <br />
+                        <br />
+
+                        <!-- Comment -->
+                        <label>Değerli Yorumlarınız</label>
+                        <div class="styled-input wide">
+                            <textarea name="comment" ng-model="comment" required ng-maxlength="100"></textarea>
+                            <div class="validateForm" ng-messages="contactform.comment.$error" ng-if="contactform.comment.$dirty">
+                                <div ng-message="required">Boş bırakılamaz</div>
+                                <div ng-message="maxlength">100 den fazla karakter girilemez</div>
+                            </div>
+                        </div>
+                        <br />
+                        <button ng-disabled="contactform.$invalid" id="btnAddRecord" type="submit" value="Send" ng-click="submitContactForm()" class="btn btn-default">Gönder</button>
+                    </form>
+                </div>
+                <div class="back">
+                    <p>Kaydınız</p>
+                    <p>Başarıyla</p>
+                    <p>Kaydedilmiştir.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

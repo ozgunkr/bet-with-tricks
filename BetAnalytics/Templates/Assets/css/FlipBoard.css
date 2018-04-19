@@ -1,0 +1,43 @@
+
+.flipper1 {
+	
+	transition: 0.6s;
+	-webkit-transform-style: preserve-3d;
+}
+
+.front, .back {
+    /*background-color: rgba(0,0,0,.3);*/
+    position: absolute;
+    /*padding:10px 30px;*/
+    top: 0;
+    left: 0;
+    right: 20px;
+    -webkit-backface-visibility: hidden;
+    -webkit-transform-style: preserve-3d;
+}
+
+.front {
+    z-index: 2;
+    /* for firefox 31 */
+    -webkit-transform: rotateY(0deg);
+}
+
+.back {
+    -webkit-transform: rotateY(180deg);
+    word-break: break-all;
+    word-wrap: break-word;
+    margin-left: 0;
+    text-align: -webkit-left;
+    font-size: 25px;
+    padding-top: 100px;
+    padding-left: 0;
+    padding-right: 0;
+    font-family: inherit;
+    font-weight: 800;
+}
+.flip {
+    -webkit-transform: rotateY(180deg);
+}
+
+
+

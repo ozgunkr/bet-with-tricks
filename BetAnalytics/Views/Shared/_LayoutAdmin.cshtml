@@ -1,0 +1,205 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>BetAnalytics Admin Portal</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="~/Templates/Assets/css/sb-admin.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="~/Templates/Assets/fonts/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="~/Templates/Assets/css/angular-material.min.css" rel="stylesheet" type="text/css">
+    <link href="~/Templates/Assets/css/spinner.css" rel="stylesheet" type="text/css">
+    <link href="~/Templates/Assets/css/angular-moment-picker.min.css" rel="stylesheet" type="text/css">
+
+    <!-- Angular Components -->
+
+    <script type="text/javascript" src="~/Scripts/angular.js"></script>
+    <script type="text/javascript" src="~/Scripts/angular-route.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/angular-messages.js"></script>
+    <script type="text/javascript" src="~/Templates/Assets/js/angular-material.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/angular-animate.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/angular-aria.js"></script>
+    <script type="text/javascript" src="~/Scripts/angular-sanitize.min.js"></script>
+    <script type="text/javascript" src="~/Templates/Assets/js/moment-with-locales.min.js"></script>
+    <script type="text/javascript" src="~/Templates/Assets/js/angular-moment-picker.min.js"></script>
+
+    <script type="text/javascript" src="~/Templates/Assets/AdminAngular/app.js"></script>
+    <script type="text/javascript" src="~/Templates/Assets/AdminAngular/Controllers/GamesPageController.js"></script>
+    <script type="text/javascript" src="~/Templates/Assets/AdminAngular/Controllers/ImageUploadMultipleController.js"></script>
+    <script type="text/javascript" src="~/Templates/Assets/AdminAngular/Controllers/GameProcessController.js"></script>
+    <script type="text/javascript" src="~/Templates/Assets/AdminAngular/Controllers/ArticleImageUploadController.js"></script>
+    <script type="text/javascript" src="~/Templates/Assets/AdminAngular/Controllers/ArticlesPageController.js"></script>
+    <script type="text/javascript" src="~/Templates/Assets/AdminAngular/Controllers/ArticleProcessController.js"></script>
+    <script type="text/javascript" src="~/Templates/Assets/AdminAngular/Controllers/ContactPageController.js"></script>
+    <script type="text/javascript" src="~/Templates/Assets/AdminAngular/Controllers/BetProcessController.js"></script>
+    <script type="text/javascript" src="~/Templates/Assets/AdminAngular/Controllers/BetPageController.js"></script>
+
+    <!-- Angular Directives -->
+
+    <script type="text/javascript" src="~/Templates/Assets/AdminAngular/Directives/imagePathValidationDirective.js"></script>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body ng-app="AdminApp">
+
+    <div id="wrapper">
+
+        <!-- Navigation -->
+        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="@Url.Action("Index", "Admin", null)">BetAnalytics Admin Dashboard</a>
+            </div>
+            <!-- Top Menu Items -->
+            <ul class="nav navbar-right top-nav">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> @HttpContext.Current.User.Identity.Name <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        @*<li>
+                                <a href="#"><i class="fa fa-fw fa-user"></i> Profile</a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="fa fa-fw fa-envelope"></i> Inbox</a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="fa fa-fw fa-gear"></i> Settings</a>
+                            </li>
+                            <li class="divider"></li>*@
+                        <li>
+                            @using (Html.BeginForm("Logout", "Account", FormMethod.Post))
+                            {
+                                <a href="javascript:;" onclick="document.forms[0].submit();"> <i class="fa fa-fw fa-power-off"></i> Logout</a>
+                            }
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
+            <div class="collapse navbar-collapse navbar-ex1-collapse">
+                <ul class="nav navbar-nav side-nav">
+                    <li>
+                        <a href="javascript:;" data-toggle="collapse" data-target="#demo1"><i class="fa fa-fw fa-arrows-v"></i> Article Transactions <i class="fa fa-fw fa-caret-down"></i></a>
+                        <ul id="demo1" class="collapse">
+                            <li>
+                                <a href="@Url.Action("Articles", "Admin", null)">Article List</a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("ArticleProcess", "Admin", null)">New Article</a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("ArticleImgUpload", "Admin", null)">Upload Article Images</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:;" data-toggle="collapse" data-target="#demo2"><i class="fa fa-fw fa-arrows-v"></i> Game Transactions <i class="fa fa-fw fa-caret-down"></i></a>
+                        <ul id="demo2" class="collapse">
+                            <li>
+                                <a href="@Url.Action("Games", "Admin", null)">Game List</a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("GameProcess", "Admin", null)">New Game</a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("ImgUpload", "Admin", null)">Upload Game Images</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:;" data-toggle="collapse" data-target="#demo3"><i class="fa fa-fw fa-arrows-v"></i> Bet Transactions <i class="fa fa-fw fa-caret-down"></i></a>
+                        <ul id="demo3" class="collapse">
+                            <li>
+                                <a href="@Url.Action("Bets", "Admin", null)">Bet List</a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("BetProcess", "Admin", null)">New Bet</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Contacts", "Admin", null)"><i class="fa fa-fw fa-table"></i> Contacts</a>
+                    </li>
+                    <li>
+                        @*<li>
+                <a href="forms.html"><i class="fa fa-fw fa-edit"></i> Forms</a>
+            </li>
+            <li>
+                <a href="bootstrap-elements.html"><i class="fa fa-fw fa-desktop"></i> Bootstrap Elements</a>
+            </li>
+            <li>
+                <a href="bootstrap-grid.html"><i class="fa fa-fw fa-wrench"></i> Bootstrap Grid</a>
+            </li>
+            <li>
+                <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> Dropdown <i class="fa fa-fw fa-caret-down"></i></a>
+                <ul id="demo" class="collapse">
+                    <li>
+                        <a href="#">Dropdown Item</a>
+                    </li>
+                    <li>
+                        <a href="#">Dropdown Item</a>
+                    </li>
+                </ul>
+            </li>*@
+@*<li class="active">
+                        <a href="blank-page.html"><i class="fa fa-fw fa-file"></i> Blank Page</a>
+                    </li>*@
+                    @*<li>
+                            <a href="index-rtl.html"><i class="fa fa-fw fa-dashboard"></i> RTL Dashboard</a>
+                        </li>*@
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </nav>
+
+        <div id="page-wrapper">
+
+            <div class="container-fluid">
+
+                <br />
+                <!-- Page Heading -->
+               
+                        @RenderBody()
+                <!-- /.row -->
+
+            </div>
+            <!-- /.container-fluid -->
+
+        </div>
+        <!-- /#page-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+    <!-- jQuery -->
+    <script type="text/javascript" src="~/Scripts/jquery-1.10.2.min.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script type="text/javascript" src="~/Scripts/bootstrap.min.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,150 @@
+﻿
+@{
+    ViewBag.Title = "Bets";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+<div class="col-lg-12">
+    <h1 class="page-header">
+        Bet List
+    </h1>
+    <ol class="breadcrumb">
+        <li>
+            <i class="fa fa-dashboard"></i>  <a href="@Url.Action("Index", "Admin", null)">Dashboard</a>
+        </li>
+        <li class="active">
+            <i class="fa fa-file"></i> Game List
+        </li>
+    </ol>
+</div>
+<div class="container">
+    <div class="spinner" ng-show="loading">
+        <div class="loader"></div>
+    </div>
+        <div class="row" ng-controller="BetPageCtrl">
+            <div class="col-lg-12">
+                <h2>Bordered with Striped Rows</h2>
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover table-striped">
+                        <thead>
+                            <tr>
+                                <th>Bet Name</th>
+                                <th>Create Date</th>
+                                <th>Active</th>
+                                <th>Description</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="i in BetMasterListPg">
+                                <td>{{i.bet_name}}</td>
+                                <td>{{i.create_date}}</td>
+                                <td>{{i.is_active}}</td>
+                                <td>{{i.description}}</td>
+                                <td>
+                                    <a href ng:click="editModal(i.id)" data-toggle="modal" data-target="#edit" type="button"><i style="margin-right: 0.5em; position:center" class="fa fa-edit fa-lg"></i></a>
+                                    <a href ng:click="deleteModal(i.id, $index)" type="button"><i style="margin-right: 0.5em; position:center" class="fa fa-trash-o fa-lg"></i></a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!-- Modal Edit-->
+            <div id="edit" class="modal fade" role="dialog">
+                <div class="modal-dialog" style="width:1050px;">
+                    <div class="spinner" ng-show="loading">
+                        <div class="loader"></div>
+                    </div>
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Edit Games</h4>
+                        </div>
+                        <div class="modal-body">
+                            <br />
+
+                            <div class="row">
+                                <form name="masterForm">
+                                    <div class="form-group">
+                                        <label>Bet Name</label>
+                                        <input type="text" name="betname" ng-model="betname" class="form-control" required>
+                                        <div class="validateAdminForm" ng-messages="masterForm.betname.$error" ng-if="masterForm.betname.$dirty">
+                                            <div ng-message="required">Cannot Be Empty</div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Is Active </label>
+                                        <select style="width:100px" ng-model="isActive" class="form-control" ng-options="i for i in artAct" required></select>
+                                        <i>type 1 for active, 0 for inactive</i>
+                                        <div class="validateAdminForm" ng-messages="masterForm.isActive.$error" ng-if="masterForm.isActive.$dirty">
+                                            <div ng-message="required">Cannot Be Empty</div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Bet Description</label>
+                                        <textarea type="text" name="gameDescription" ng-model="betDescription" class="form-control" required maxlength="200"></textarea>
+                                        <div class="validateAdminForm" ng-messages="masterForm.betDescription.$error" ng-if="masterForm.betDescription.$dirty">
+                                            <div ng-message="required">Cannot Be Empty</div>
+                                            <div ng-message="maxlength">Cannot Be Longer Than 200 Char</div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th width="70px">Game Name</th>
+                                        <th width="70px">Bet Code</th>
+                                        <th width="60px">Preference</th>
+                                        <th width="180px">Trust</th>
+                                        <th width="380px">Ratio</th>
+                                        <th width="80px">Possibility</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    <tr ng-repeat="b in BetDetailList" id="BetDetailList">
+                                        <td>
+                                            <input type="text" class="form-control" placeholder="" ng-model="b.game_name">
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control" placeholder="" ng-model="b.game_code">
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control" placeholder="" ng-model="b.preference">
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control" placeholder="" ng-model="b.trust">
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control" placeholder="" ng-model="b.ratio">
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control" placeholder="" ng-model="b.possibility">
+                                        </td>
+                                        <td>
+                                            <a href ng:click="deleteDetail(b.id, $index)" type="button"><i style="margin-right: 0.5em; position:center" class="fa fa-trash-o fa-lg"></i></a>
+                                        </td>
+
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <a ng-click="addRow()" class="btn btn-primary">Add Row <i class="fa fa-plus"></i></a>
+
+                            <br />
+                            <label ng-show="deleteError">At Least One Row of Detail Must Remain Left!</label>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" ng-click="updateBets()" ng-disabled="masterForm.$invalid" class="btn btn-success"> Submit <i class="fa fa-check"></i> </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>

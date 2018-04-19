@@ -1,0 +1,106 @@
+﻿
+@{
+    ViewBag.Title = "BetProcess";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="col-lg-12">
+    <h1 class="page-header">
+        Bet Processes
+    </h1>
+    <ol class="breadcrumb">
+        <li>
+            <i class="fa fa-dashboard"></i>  <a href="@Url.Action("Index", "Admin", null)">Dashboard</a>
+        </li>
+        <li class="active">
+            <i class="fa fa-file"></i> Bet Processes
+        </li>
+    </ol>
+</div>
+<div class="container">
+    <div ng-controller="BetProcessCtrl">
+            <form name="masterForm">
+                <div class="form-group">
+                    <label>Bet Name</label>
+                    <input type="text" name="betname" ng-model="betname" class="form-control" required>
+                    <div class="validateAdminForm" ng-messages="masterForm.betname.$error" ng-if="masterForm.betname.$dirty">
+                        <div ng-message="required">Cannot Be Empty</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Bet Description</label>
+                    <textarea type="text" name="gameDescription" ng-model="betDescription" class="form-control" required maxlength="200"></textarea>
+                    <div class="validateAdminForm" ng-messages="masterForm.betDescription.$error" ng-if="masterForm.betDescription.$dirty">
+                        <div ng-message="required">Cannot Be Empty</div>
+                        <div ng-message="maxlength">Cannot Be Longer Than 200 Char</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Is Active </label>
+                    <select style="width:100px" ng-model="priority" class="form-control" ng-options="i for i in artAct" required></select>
+                    <i>type 1 for appearance in Home Page, 0 for All Games Page</i>
+                    <div class="validateAdminForm" ng-messages="masterForm.priority.$error" ng-if="masterForm.priority.$dirty">
+                        <div ng-message="required">Cannot Be Empty</div>
+                    </div>
+                </div>
+            </form>
+            <br />
+            <br />
+            <a ng-click="addRow()" class="btn btn-primary">Add Row <i class="fa fa-plus"></i></a>
+            <br />
+            <br />
+            <table class="table">
+                <div class="spinner" ng-show="loading">
+                    <div class="loader"></div>
+                </div>
+                <thead>
+                    <tr>
+                        <th width="60px">Game Name</th>
+                        <th width="60px">Bet Code</th>
+                        <th width="60px">Preference</th>
+                        <th width="180px">Trust</th>
+                        <th width="380px">Ratio</th>
+                        <th width="80px">Possibility</th>
+                        <th width="80px">Game Date</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    <tr ng-repeat="b in NewBetDetailList" id="NewGameList">
+
+                        <td>
+                            <input type="text" class="form-control" placeholder="" ng-model="b.game_name">
+                        </td>
+                        <td>
+                            <input type="text" class="form-control" placeholder="" ng-model="b.game_code">
+                        </td>
+                        <td>
+                            <input type="text" class="form-control" placeholder="" ng-model="b.preference">
+                        </td>
+                        <td>
+                            <input type="text" class="form-control" placeholder="" ng-model="b.trust">
+                        </td>
+                        <td>
+                            <input type="text" class="form-control" placeholder="" ng-model="b.ratio">
+                        </td>
+                        <td>
+                            <input type="number" class="form-control" placeholder="" ng-model="b.possibility">
+                        </td>
+                        <td>
+                            <md-datepicker ng-model="b.game_date" md-current-view="year" md-placeholder="Enter date" required></md-datepicker>
+                        </td>
+                        <td>
+                            <a ng:click="deleteRow($index)"><i class="fa fa-times delete"></i></a>
+                        </td>
+
+                    </tr>
+                </tbody>
+            </table>
+            <br />
+            <a ng-click="submit()" ng-disabled="masterForm.$invalid" class="btn btn-primary">Submit All <i class="fa fa-check"></i></a>
+            <label ng-show="rowError">Detail Cannot Be Empty</label>
+
+        </div>
+
+</div>

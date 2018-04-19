@@ -1,0 +1,103 @@
+﻿header.masthead .page-heading,
+header.masthead .post-heading,
+header.masthead .site-heading {
+    padding: 100px 0 106px 0;
+    color: white;
+}
+
+header.masthead {
+    background-attachment: scroll;
+    border-bottom: 4px solid black;
+}
+
+.cst {
+    color: white;
+}
+
+#customUL {
+    margin-left: 60px;
+}
+
+.custom-p {
+    font-size:16px;
+}
+
+#accountInfo {
+    background-color: whitesmoke;
+    text-align: center;
+    margin: 50px 20px 50px 20px;
+    border-radius: 1rem;
+    padding: 20px;
+    font-size: 18px;
+}
+
+label {
+    color: #FF6F3C;
+    font-size: 22px;
+}
+
+.navbar-brand img{
+    width:200px;
+  height:55px;
+  box-sizing:border-box;
+  padding-left: 200px;
+    background: url(../../Images/Beyaz.png) left top no-repeat;
+}
+@media (max-width: 768px) {
+    .navbar-brand img {
+        width: 200px;
+        height: 55px;
+        box-sizing: border-box;
+        padding-left: 200px;
+        background: url(../../Images/Turuncu.png) left top no-repeat;
+    }
+
+    #btcAccount {
+        font-size:11px;
+    }
+
+    #ethAccount {
+        font-size: 11px;
+    }
+}
+
+#ethAccount img {
+    height: 40px;
+    width: 30px;
+}
+
+#btcAccount {
+    background-color: #f7845b;
+    border-radius: 10px;
+    padding: 10px;
+    color: white;
+}
+
+    #btcAccount label {
+        color: #593021;
+        font-weight: 400;
+    }
+
+#ethAccount {
+    background-color: #8e8f91;
+    border-radius: 10px;
+    padding: 10px;
+    color: white;
+}
+
+    #ethAccount label {
+        color: #333842;
+        font-weight: 400;
+    }
+
+#bankAccount {
+    background-color: #85bf89;
+    border-radius: 10px;
+    padding: 10px;
+    color: white;
+}
+
+    #bankAccount label {
+        color: #304731;
+        font-weight: 400;
+    }

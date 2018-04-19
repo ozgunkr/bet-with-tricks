@@ -1,31 +1,166 @@
 ﻿@{
     ViewBag.Title = "Home Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-</div>
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+<script type="text/javascript" src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="~/Scripts/bootstrap.min.js"></script>
+
+
+<link href="~/Templates/Assets/css/index.css" rel="stylesheet">
+
+<!-- Page Header -->
+<header class="masthead" style="background-image: url('/Templates/Images/bg2.png')">
+    <div class="container">
+        <div class="row">
+            <div class="mx-auto">
+                <div class="site-heading">
+                    <h1 id="h1">BETRICKS</h1>
+                    <span id="subheading">UZMAN TAHMİNLERİNİ OKU, TERCİHİNİ YAP, KAZAN!</span>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
+</header>
+
+<div class="container" id="contind">
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="text-center">Bahisler</h1>
+            <a id="custAllGmsBtn" class="btn btn-default" href="@Url.Action("AllGames", "Home", null)">Tüm Maçlar</a>
     </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+        </div>
+    <div class="row" ng-controller="BetCtrl">
+        <div class="col-lg-12">
+            <ul class="nav nav-tabs">
+                <li ng-repeat="x in GameMasterList | filter : {is_active: '1' } | unique:'game_day' | orderBy">
+                    <a data-toggle="tab" href="#GameDate_{{x.game_day_prompt}}" ng-click="getTab(x.game_day_prompt, x.game_date)">{{x.game_day}}</a>
+                </li>
+            </ul>
+
+
+
+            @*<ul class="nav nav-tabs">
+                    <li class="active"><a data-toggle="tab" href="#Football"><i class="fa fa-futbol-o fa-2x" aria-hidden="true"></i></a></li>
+                    <li><a data-toggle="tab" href="#Basketball"><i class="fa fa-dribbble fa-2x" aria-hidden="true"></i></a></li>
+                </ul>
+
+                <div class="tab-content">
+                    <div id="Football" class="tab-pane fade">
+                        <ul>
+                            <li ng-repeat="a in gameCat | filter : {category: 'Football' } | unique:'sub_category'">
+                                <a href="#gameMaster_{{a.sub_category}}">{{a.sub_category}}</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div id="Basketball" class="tab-pane fade">
+                        <ul>
+                            <li ng-repeat="b in gameCat | filter : {category: 'Basketball' } | unique:'sub_category'">
+                                <a href="#gameMaster_{{b.sub_category}}">{{b.sub_category}}</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>*@
+        </div>
+        <div class="tab-content">
+            <div class="col-lg-12">
+                <!-- Categories Widget -->
+                <div class="card my-4">
+                    <h5 class="card-header"></h5>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6">
+                                <h4>{{fCategory}}</h4>
+                                <ul class="list-group">
+                                    <li class="list-group-item" ng-repeat="a in gameCat | filter : {category: 'Futbol' } | unique:'sub_category'">
+                                        <a href="#gameMaster_{{a.sub_category}}">{{a.sub_category}}</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6">
+                                <h4>{{bCategory}}</h4>
+                                <ul class="list-group">
+                                    <li class="list-group-item" ng-repeat="b in gameCat | filter : {category: 'Basketbol' } | unique:'sub_category'">
+                                        <a href="#gameMaster_{{b.sub_category}}">{{b.sub_category}}</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="GameDate_{{y.game_day_prompt}}" class="tab-pane active show fade in" ng-repeat="y in GameMasterPageList | unique:'game_day_prompt'">
+                    <br />
+                    <div class="row" ng-repeat="j in gameCat | unique:'category'">
+                        <h2 class="hh2">{{j.category}}</h2>
+                        <div class="row" ng-repeat="i in gameCat | filter : {category: j.category}  | unique:'sub_category'">
+                            <h3 class="hh3" id="gameMaster_{{i.sub_category}}">{{i.sub_category}}</h3>
+                            <div class="col-lg-3 col-md-4 col-xs-12 col-sm-6" ng-repeat="x in GameMasterPageList | filter : {sub_category: i.sub_category}">
+                                <div class="img__wrap" ng:click="getGameDetails(x.id, $index)" data-toggle="modal" data-target="#gameDetails_{{x.id}}">
+                                    <img class="img__img img-responsive" ng-src="{{x.image}}" />
+                                    <div class="img__description_layer">
+                                        <p class="img__description">{{x.game_name}} <br /><br /><br /></p>
+                                    </div>
+                                </div>
+                                <!-- Modal Game Details-->
+
+                                <div id="gameDetails_{{x.id}}" class="modal fade" role="dialog">
+                                    <div class="modal-dialog">
+
+                                        <!-- Modal content-->
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                <h2 class="modal-title">{{gameName}}</h2>
+                                                <h4 class="modal-title">{{gameDescription}}</h4>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="row">
+                                                    <div class="col-lg-12">
+                                                        <h2>Bahis Detayları</h2>
+                                                        <br />
+                                                        <div class="table-responsive">
+                                                            <table class="table table-bordered">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>Maç Kodu</th>
+                                                                        <th>Tercih</th>
+                                                                        <th>Güven</th>
+                                                                        <th>Oran</th>
+                                                                        <th>Tutma Olasılığı</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr ng-repeat="i in GameDetailsList">
+                                                                        <td>{{i.game_code}}</td>
+                                                                        <td>{{i.preference}}</td>
+                                                                        <td>{{i.trust}}</td>
+                                                                        <td>{{i.ratio}}</td>
+                                                                        <td ng-class="{'tr-red': i.possibility < 20, 'tr-yellow': 20 < i.possibility , 'tr-lightgreen': 50 < i.possibility ,'tr-green': 70 < i.possibility }">{{i.possibility}}</td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
+<br />
+<script src="~/Templates/Assets/js/doubletaptogo.js"></script>
+<script>
+    $(function () {
+        $('#nav li:has(ul)').doubleTapToGo();
+    });
+</script>

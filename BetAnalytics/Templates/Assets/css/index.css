@@ -1,0 +1,235 @@
+﻿/* relevant styles */
+html {
+    scroll-behavior: smooth
+}
+
+
+.img__wrap {
+    position: relative;
+    height: 100%;
+    width: 100%;
+    margin-bottom: 15px;
+    /*cursor: url('/Templates/GameImages/1.png'), pointer;*/
+    cursor: pointer;
+}
+
+.img__description_layer {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    /*background: rgba(36, 62, 206, 0.6);*/
+    /*background:rgba(183, 140, 51, 0.6) ;*/
+    background: rgba(55, 71, 79, 0.6);
+    color: #fff;
+    visibility: hidden;
+    opacity: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* transition effect. not necessary */
+    transition: opacity .2s, visibility .2s;
+    width: 97%;
+    margin-left: 5px;
+    border-radius: 8px;
+}
+
+.img__wrap:hover .img__description_layer {
+    visibility: visible;
+    opacity: 1;
+    border-radius: 8px;
+    width: 97%;
+}
+
+.img__description {
+    transition: .2s;
+    transform: translateY(1em);
+}
+
+.img__wrap:hover .img__description {
+    transform: translateY(0);
+}
+
+.img-responsive {
+    width: 97%;
+    margin-left: 5px;
+    border-radius: 8px;
+}
+
+.tr-red {
+    background-color: rgb(153, 0, 0);
+    color: white;
+}
+
+.tr-yellow {
+    background-color: rgb(230, 138, 0);
+    color: white;
+}
+
+.tr-lightgreen {
+    background-color: rgb(92, 214, 92);
+    color: white;
+}
+
+.tr-green {
+    background-color: rgb(0, 128, 0);
+    color: white;
+}
+
+h1 {
+    color: #ff5316;
+}
+
+h4 {
+    font-size: 20px;
+    line-height: 24px;
+    font-weight: 700;
+    color: #ff8054;
+    margin-left: 5px;
+}
+
+a, a:link {
+    color: #ff5316;
+}
+
+.hh2 {
+    margin-top: 0;
+    margin-bottom: 0;
+    text-align: center;
+    color: #ff8f68;
+}
+
+    .hh2:after {
+        content: '';
+        background: #ff8f68;
+        text-align: center;
+        width: 50%;
+        margin-left: 25%;
+        height: 2px;
+        display: block;
+        margin-bottom: 10px;
+    }
+
+.hh3 {
+    margin-top: 0;
+    margin-bottom: 0;
+    text-align: left;
+    color: #ffded3;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+    .hh3:after {
+        content: '';
+        background: #ffded3;
+        width: 30%;
+        height: 2px;
+        display: block;
+        margin-bottom: 10px;
+    }
+
+
+.btn {
+    float: right;
+}
+
+#contind {
+    background-color: #29363d; /*#6E828A;*/
+    border-radius: 10px;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+#custAllGmsBtn {
+    color: white;
+    border-color: white;
+    background-color: #FF6F3C; /*#0085A1;*/
+}
+
+    #custAllGmsBtn:hover {
+        color: #FF6F3C;
+        border-color: #FF6F3C;
+        background-color: white;
+    }
+
+    #custAllGmsBtn:active {
+        color: #FF6F3C;
+        border-color: #FF6F3C;
+        background-color: white;
+    }
+
+    #custAllGmsBtn:focus {
+        color: white;
+        border-color: white;
+        background-color: #ba4c25;
+    }
+
+@media screen and (min-width: 768px) {
+
+    #custom-nav {
+        background-color: rgba(0,0,0,0.2);
+    }
+
+
+
+        #custom-nav .container {
+            padding-bottom: 10px;
+        }
+}
+
+@media (min-width: 1200px) {
+    .container {
+        max-width: 1650px;
+    }
+
+    #h1 {
+        color: #ff5316;
+        background-color: #37474F;
+        display: inline-block;
+        padding: 10px 300px 10px 300px;
+        border-radius: 25px;
+        border-bottom: 5px solid #ff885e;
+        border-top: 5px solid #ff885e;
+    }
+
+    #subheading {
+        color: #37474F;
+        background-color: #ff885e;
+        display: inline-block;
+        padding: 10px 150px 10px 150px;
+        border-radius: 25px;
+        border-right: 5px solid #ff885e;
+        border-left: 5px solid #ff885e;
+        font-size: 20px;
+    }
+
+}
+
+
+p {
+    font-weight: 400;
+    font-size: 28px;
+    position: center;
+}
+
+
+#plusSign {
+    position: center;
+}
+.navbar-brand img {
+    width: 200px;
+    height: 55px;
+    box-sizing: border-box;
+    padding-left: 200px;
+    background: url(../../Images/Beyaz.png) left top no-repeat;
+}
+@media (max-width: 768px) {
+    .navbar-brand img {
+        width: 200px;
+        height: 55px;
+        box-sizing: border-box;
+        padding-left: 200px;
+        background: url(../../Images/Turuncu.png) left top no-repeat;
+    }
+}

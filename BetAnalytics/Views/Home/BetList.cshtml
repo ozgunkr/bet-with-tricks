@@ -1,0 +1,139 @@
+﻿
+@{
+    ViewBag.Title = "BetList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<script type="text/javascript" src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="~/Scripts/bootstrap.min.js"></script>
+
+<link href="~/Templates/Assets/css/betlist.css" rel="stylesheet">
+<!-- Page Header -->
+<header class="masthead" style="background-image: url('/Templates/Images/betlist.png')">
+    <div class="container">
+        <div class="row">
+            <div class="mx-auto">
+                <div class="site-heading">
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<div class="container">
+    <h2>Kuponlar</h2>
+
+    <div class="row" ng-controller="BetListCtrl">
+
+        <div class="col-lg-12">
+            <br />
+            <ul uib-pagination boundary-links="true"
+                total-items="(AllBetsList | filter:searchItem).length"
+                ng-model="currentPage"
+                ng-change="updatePageIndexes()"
+                class="pagination-sm"
+                items-per-page="itemsPerPage"
+                previous-text="&lsaquo;"
+                next-text="&rsaquo;"
+                first-text="&laquo;"
+                last-text="&raquo;"></ul>
+            <br />
+            <form>
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="input-group-addon"><i class="fa fa-search"></i></div>
+                        <input type="text" class="form-control" placeholder="Ara" ng-model="searchItem">
+                    </div>
+                </div>
+            </form>
+            <br />
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th width="10px">#</th>
+                            <th>Kupon Adı</th>
+                            <th>Kupon Açıklaması</th>
+                        </tr>
+                    </thead>
+                    <tbody ng-repeat="i in AllBetsList | filter : searchItem | limitTo:itemsPerPage:(currentPage - 1) * itemsPerPage">
+                        <tr>
+                            <td>
+                                <button id="betButton" ng:click="openDetailModal(i.id)" data-toggle="modal" data-target="#detail" type="button" class="btn btn-primary btn-sm outline">Detay</button>
+                            </td>
+                            <td>{{i.bet_name}}</td>
+                            <td>{{i.description}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- Modal Game Details-->
+
+        <div id="detail" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h2 class="modal-title" ng-model="betName">{{betName}}</h2>
+                        <h4 class="modal-title" ng-model="betDescription">{{betDescription}}</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <h2>Bahis Detayları</h2>
+                                <br />
+                                <div class="table-responsive">
+                                    <table class="table table-bordered table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Maç Kodu</th>
+                                                <th>Maç</th>
+                                                <th>Maç Tarihi</th>
+                                                <th>Tercih</th>
+                                                <th>Güven</th>
+                                                <th>Oran</th>
+                                                <th>Tutma Olasılığı</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="i in AllBetDetailLst">
+                                                <td>{{i.game_code}}</td>
+                                                <td>{{i.game_name}}</td>
+                                                <td>{{i.game_date_prompt}}</td>
+                                                <td>{{i.preference}}</td>
+                                                <td>{{i.trust}}</td>
+                                                <td>{{i.ratio}}</td>
+                                                <td ng-class="{'tr-red': i.possibility < 20, 'tr-yellow': 20 < i.possibility , 'tr-lightgreen': 50 < i.possibility ,'tr-green': 70 < i.possibility }">{{i.possibility}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <table id="custTable" class="table table-bordered table-responsive">
+                                <thead>
+                                    <tr>
+                                        <th>Toplam Oran</th>
+                                        <th>Ortalama Kazanma Olasılığı</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>{{totalRatio}}</td>
+                                        <td ng-class="{'tr-red': avgPossibility < 20, 'tr-yellow': 20 < avgPossibility , 'tr-lightgreen': 50 < avgPossibility ,'tr-green': 70 < avgPossibility }">{{avgPossibility}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
